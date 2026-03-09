@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design Tokens ─────────────────────────────────────────────────────────── */
+:root {
+  /* Surfaces */
+  --color-surface: #04080f;
+  --color-surface-2: #0a1120;
+  --color-surface-3: #111c35;
+
+  /* Text */
+  --color-text-primary: #e8f0fe;
+  --color-text-secondary: #7b91b5;
+  --color-text-muted: #3d506e;
+
+  /* Accent */
+  --color-accent: #00e676;
+  --color-accent-dim: rgba(0, 230, 118, 0.15);
+
+  /* Borders */
+  --color-border-subtle: rgba(255, 255, 255, 0.055);
+  --color-border-accent: rgba(0, 230, 118, 0.45);
+
+  /* Cloud Providers */
+  --color-aws: #ff9900;
+  --color-azure: #2f8de4;
+  --color-gcp: #4285f4;
+  --color-onprem: #94a3b8;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Fonts */
+  --font-heading: var(--font-syne);
+  --font-body: var(--font-dm-sans);
+  --font-mono: var(--font-space-mono);
+}
+
+/* ─── Base ───────────────────────────────────────────────────────────────────── */
+body {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Focus ──────────────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface-2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-text-muted);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
+
+/* ─── Typography ─────────────────────────────────────────────────────────────── */
+.text-fluid-hero {
+  font-size: clamp(2rem, 6vw + 0.5rem, 5rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+/* ─── Topology Canvas ────────────────────────────────────────────────────────── */
+.topology-canvas {
+  container-type: inline-size;
+  container-name: topology;
+}
+
+/* ─── Clip Paths ─────────────────────────────────────────────────────────────── */
+.octagon-clip {
+  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+}
+
+.hex-clip {
+  clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+}
+
+/* ─── Cloud Node ─────────────────────────────────────────────────────────────── */
+.cloud-node {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  border: 1px solid var(--color-border-subtle);
+}
+
+.cloud-node:hover {
+  border-color: color-mix(in srgb, var(--color-accent) 60%, transparent);
+}
+
+.cloud-node.is-selected {
+  border-color: var(--color-border-accent);
+  box-shadow: 0 0 40px rgba(0, 230, 118, 0.12);
+}
+
+.cloud-node.is-deemphasized {
+  opacity: 0.45;
+}
+
+/* ─── Container Queries ──────────────────────────────────────────────────────── */
+@container topology (max-width: 560px) {
+  .cloud-node {
+    padding: var(--space-sm);
+  }
+}
+
+/* ─── Reduced Motion ─────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
